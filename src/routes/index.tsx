@@ -120,14 +120,14 @@ export default component$(() => {
   return (
     <div class="flex flex-col">
       <header class="flex justify-center p-6 sm:p-7 md:p-8 lg:p-9">
-        <div class="flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:gap-20 xl:max-w-6xl">
+        <div class="flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:max-w-6xl xl:gap-20">
           <Img2024SummerOlympicsLogo class="h-32 w-auto sm:h-40 md:h-44 lg:h-52 xl:h-60" />
           <div class="flex w-full flex-col gap-6 sm:gap-7 md:gap-8 lg:gap-10">
             <h1 class="text-center text-lg font-medium sm:text-2xl md:text-3xl lg:text-left">
               Build your own Olympic medal standings
             </h1>
             <div class="flex w-full flex-col items-center gap-4 md:flex-row md:gap-5 lg:gap-6">
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-amber-300 bg-amber-200 px-4 py-3 shadow shadow-amber-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-amber-300 bg-amber-200 px-4 pb-4 pt-3 shadow shadow-amber-700/20 lg:w-auto">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-amber-600">Gold</span>
                   <span class="font-medium text-black">
@@ -137,6 +137,7 @@ export default component$(() => {
                 <input
                   type="range"
                   class="
+                    h-2.5
                     w-full
                     appearance-none
                     rounded-lg
@@ -147,12 +148,14 @@ export default component$(() => {
                     [&::-moz-range-thumb]:appearance-none
                     [&::-moz-range-thumb]:rounded-full
                     [&::-moz-range-thumb]:bg-black
+                    [&::-moz-range-thumb]:shadow
                     [&::-webkit-slider-thumb]:h-4
                     [&::-webkit-slider-thumb]:w-4
                     [&::-webkit-slider-thumb]:cursor-pointer
                     [&::-webkit-slider-thumb]:appearance-none
                     [&::-webkit-slider-thumb]:rounded-full
                     [&::-webkit-slider-thumb]:bg-black
+                    [&::-webkit-slider-thumb]:shadow
                   "
                   min={0}
                   max={10}
@@ -160,7 +163,7 @@ export default component$(() => {
                   bind:value={goldWeight}
                 />
               </label>
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 py-3 shadow shadow-slate-700/20 lg:w-auto">
+              <label class="pb-4shadow flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 pb-4 pt-3 shadow-slate-700/20 lg:w-auto">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-slate-500">Silver</span>
                   <span class="font-medium text-black">
@@ -170,6 +173,7 @@ export default component$(() => {
                 <input
                   type="range"
                   class="
+                    h-2.5
                     w-full
                     appearance-none
                     rounded-lg
@@ -180,12 +184,14 @@ export default component$(() => {
                     [&::-moz-range-thumb]:appearance-none
                     [&::-moz-range-thumb]:rounded-full
                     [&::-moz-range-thumb]:bg-black
+                    [&::-moz-range-thumb]:shadow
                     [&::-webkit-slider-thumb]:h-4
                     [&::-webkit-slider-thumb]:w-4
                     [&::-webkit-slider-thumb]:cursor-pointer
                     [&::-webkit-slider-thumb]:appearance-none
                     [&::-webkit-slider-thumb]:rounded-full
                     [&::-webkit-slider-thumb]:bg-black
+                    [&::-webkit-slider-thumb]:shadow
                   "
                   min={0}
                   max={10}
@@ -193,7 +199,7 @@ export default component$(() => {
                   bind:value={silverWeight}
                 />
               </label>
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-red-300 bg-red-200 px-4 py-3 text-red-500 shadow shadow-red-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-red-300 bg-red-200 px-4 pb-4 pt-3 text-red-500 shadow shadow-red-700/20 lg:w-auto">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-red-500">Bronze</span>
                   <span class="font-medium text-black">
@@ -203,6 +209,7 @@ export default component$(() => {
                 <input
                   type="range"
                   class="
+                    h-2.5
                     w-full
                     appearance-none
                     rounded-lg
@@ -213,12 +220,14 @@ export default component$(() => {
                     [&::-moz-range-thumb]:appearance-none
                     [&::-moz-range-thumb]:rounded-full
                     [&::-moz-range-thumb]:bg-black
+                    [&::-moz-range-thumb]:shadow
                     [&::-webkit-slider-thumb]:h-4
                     [&::-webkit-slider-thumb]:w-4
                     [&::-webkit-slider-thumb]:cursor-pointer
                     [&::-webkit-slider-thumb]:appearance-none
                     [&::-webkit-slider-thumb]:rounded-full
                     [&::-webkit-slider-thumb]:bg-black
+                    [&::-webkit-slider-thumb]:shadow
                   "
                   min={0}
                   max={10}
