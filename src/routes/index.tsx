@@ -163,7 +163,7 @@ export default component$(() => {
                   bind:value={goldWeight}
                 />
               </label>
-              <label class="pb-4shadow flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 pb-4 pt-3 shadow-slate-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 pb-4 pt-3 shadow shadow-slate-700/20 lg:w-auto">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-slate-500">Silver</span>
                   <span class="font-medium text-black">
