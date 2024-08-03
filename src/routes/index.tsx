@@ -357,7 +357,7 @@ export default component$(() => {
                 {team.n_Total}
               </div>
               {divideByPopulation.value ? (
-                <div class="flex items-baseline justify-end gap-1 text-right text-sm sm:text-base md:text-xl lg:text-2xl">
+                <div class="flex flex-col sm:flex-row items-end sm:items-baseline justify-end gap-0.5 sm:gap-1 text-right text-sm sm:text-base md:text-xl lg:text-2xl">
                   <span class="text-xs text-slate-500 sm:text-sm md:text-base lg:text-lg">
                     1 in
                   </span>
