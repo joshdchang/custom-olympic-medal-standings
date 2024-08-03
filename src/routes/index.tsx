@@ -145,7 +145,7 @@ export default component$(() => {
   return (
     <div class="flex flex-col">
       <header class="flex justify-center p-6 sm:p-7 md:p-8 lg:p-9">
-        <div class="flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:max-w-6xl xl:gap-20 py-3">
+        <div class="flex w-full max-w-5xl flex-col items-center gap-5 py-3 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:max-w-6xl xl:gap-20">
           <Img2024SummerOlympicsLogo class="h-32 w-auto sm:h-40 md:h-48 lg:h-60 xl:h-72" />
           <div class="flex w-full flex-col gap-6 sm:gap-7 md:gap-8 lg:gap-10">
             <h1 class="text-center text-lg font-medium sm:text-2xl md:text-3xl lg:text-left">
@@ -270,10 +270,17 @@ export default component$(() => {
                     class="peer sr-only"
                     bind:checked={divideByPopulation}
                   />
-                  <div class="block h-6 w-12 rounded-full bg-slate-400 transition-colors group-hover:bg-slate-500 peer-checked:bg-blue-500 group-hover:peer-checked:bg-blue-600"></div>
+                  <div class="block h-6 w-12 rounded-full bg-slate-400 transition-colors group-hover:bg-slate-500 peer-checked:bg-slate-800 group-hover:peer-checked:bg-slate-900"></div>
                   <div class="dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow shadow-slate-800/20 transition peer-checked:translate-x-[calc(100%_+_0.5rem)] peer-checked:transform"></div>
                 </div>
-                <span class="text-sm text-slate-500 md:text-base lg:text-lg">
+                <span
+                  class={
+                    "text-sm text-slate-500 transition-colors md:text-base lg:text-lg " +
+                    (divideByPopulation.value
+                      ? "text-slate-900"
+                      : "text-slate-500")
+                  }
+                >
                   Divide by population
                 </span>
               </label>
