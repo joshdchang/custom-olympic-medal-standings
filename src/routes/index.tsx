@@ -145,8 +145,8 @@ export default component$(() => {
   return (
     <div class="flex flex-col">
       <header class="flex justify-center p-6 sm:p-7 md:p-8 lg:p-9">
-        <div class="flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:max-w-6xl xl:gap-20">
-          <Img2024SummerOlympicsLogo class="h-32 w-auto sm:h-40 md:h-44 lg:h-52 xl:h-60" />
+        <div class="flex w-full max-w-5xl flex-col items-center gap-5 sm:gap-7 md:gap-9 lg:flex-row lg:gap-16 xl:max-w-6xl xl:gap-20 py-3">
+          <Img2024SummerOlympicsLogo class="h-32 w-auto sm:h-40 md:h-48 lg:h-60 xl:h-72" />
           <div class="flex w-full flex-col gap-6 sm:gap-7 md:gap-8 lg:gap-10">
             <h1 class="text-center text-lg font-medium sm:text-2xl md:text-3xl lg:text-left">
               Build your own Olympic medal standings
