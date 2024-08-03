@@ -50,6 +50,26 @@ export const useMedals = routeLoader$(async () => {
   return medalTableSchema.parse(json);
 });
 
+const timeSchema = z.object({
+  timezone: z.string(),
+  unixtime: z.number(),
+});
+
+export const useServerTime = routeLoader$(async () => {
+  const response = await fetch("https://worldtimeapi.org/api/ip");
+  const json = await response.json();
+  const time = timeSchema.parse(json);
+  return new Date().toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    minute: "2-digit",
+    hour: "2-digit",
+    timeZoneName: "short",
+    timeZone: time.timezone,
+  });
+});
+
 function getWeightText(weight: string) {
   const num = parseInt(weight);
   if (num === 0) {
@@ -95,6 +115,7 @@ const defaultBronzeWeight = "1";
 
 export default component$(() => {
   const medals = useMedals();
+  const serverTime = useServerTime();
 
   const loc = useLocation();
 
@@ -258,7 +279,7 @@ export default component$(() => {
                 />
               </label>
             </div>
-            <div class="mb-2 flex flex-col sm:flex-row gap-5 sm:justify-between">
+            <div class="mb-2 flex flex-col gap-5 sm:flex-row sm:justify-between">
               <div class="mb-2 flex items-start justify-center gap-3 lg:justify-start">
                 <label for="toggle" class="flex items-center gap-3">
                   <div class="group relative inline-block h-6 w-12">
@@ -289,16 +310,7 @@ export default component$(() => {
                   {medals.value.MedalTableInfo.n_EventsTotal} events finished
                 </p>
                 <p class="text-xs text-slate-400 md:text-sm">
-                  as of{" "}
-                  {new Date().toLocaleDateString(undefined, {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                    minute: "2-digit",
-                    hour: "2-digit",
-                    timeZoneName: "short",
-                    timeZone: "America/New_York",
-                  })}
+                  as of {serverTime.value}
                 </p>
               </div>
             </div>
