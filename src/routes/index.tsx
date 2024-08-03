@@ -63,8 +63,8 @@ export const useServerTime = routeLoader$(async () => {
     year: "numeric",
     month: "short",
     day: "numeric",
-    minute: "2-digit",
-    hour: "2-digit",
+    minute: "numeric",
+    hour: "numeric",
     timeZoneName: "short",
     timeZone: time.timezone,
   });
