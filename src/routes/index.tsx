@@ -296,6 +296,8 @@ export default component$(() => {
                     day: "numeric",
                     minute: "2-digit",
                     hour: "2-digit",
+                    timeZoneName: "short",
+                    timeZone: "America/New_York",
                   })}
                 </p>
               </div>
@@ -396,22 +398,6 @@ export default component$(() => {
       </main>
       <footer class="flex justify-center bg-slate-800 p-6 sm:p-7 md:p-8 lg:p-9">
         <div class="flex w-full max-w-5xl flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:max-w-6xl">
-          {/* <div class="flex w-full items-center justify-between gap-2">
-            <p class="text-center text-xs text-slate-100 sm:text-sm md:text-base lg:text-lg">
-              As of{" "}
-              {new Date().toLocaleDateString(undefined, {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                minute: "2-digit",
-                hour: "2-digit",
-              })}
-            </p>
-            <p class="text-center text-xs text-slate-100 sm:text-sm md:text-base lg:text-lg">
-              {medals.value.MedalTableInfo.n_EventsFinished} of{" "}
-              {medals.value.MedalTableInfo.n_EventsTotal} events finished
-            </p>
-          </div> */}
           <div class="flex w-full items-center justify-between gap-2">
             <p class="text-center text-xs text-slate-400 sm:text-sm">
               Data from{" "}
