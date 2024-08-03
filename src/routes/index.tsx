@@ -350,8 +350,10 @@ export default component$(() => {
                 {team.n_Total}
               </div>
               {divideByPopulation.value ? (
-                <div class="text-right text-sm sm:text-base md:text-xl lg:text-2xl flex items-baseline justify-end gap-1">
-                  <span class="text-slate-500 text-xs sm:text-sm md:text-base lg:text-lg">1 in</span>
+                <div class="flex items-baseline justify-end gap-1 text-right text-sm sm:text-base md:text-xl lg:text-2xl">
+                  <span class="text-xs text-slate-500 sm:text-sm md:text-base lg:text-lg">
+                    1 in
+                  </span>
                   {formatBigNumber(
                     population[team.c_NOCShort] /
                       (team.n_Gold * parseInt(goldWeight.value) +
@@ -375,12 +377,12 @@ export default component$(() => {
           <div class="flex w-full items-center justify-between gap-2">
             <p class="text-center text-xs text-slate-100 sm:text-sm md:text-base lg:text-lg">
               As of{" "}
-              {new Date(
-                medals.value.MedalTableInfo.c_AsOfDate,
-              ).toLocaleDateString(undefined, {
+              {new Date().toLocaleDateString(undefined, {
                 year: "numeric",
                 month: "short",
                 day: "numeric",
+                minute: "2-digit",
+                hour: "2-digit",
               })}
             </p>
             <p class="text-center text-xs text-slate-100 sm:text-sm md:text-base lg:text-lg">
