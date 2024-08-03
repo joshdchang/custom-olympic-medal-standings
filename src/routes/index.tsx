@@ -99,16 +99,16 @@ export default component$(() => {
   const loc = useLocation();
 
   const goldWeight = useSignal(
-    loc.url.searchParams.get("g") ?? defaultGoldWeight,
+    loc.url.searchParams.get("gold") ?? defaultGoldWeight,
   );
   const silverWeight = useSignal(
-    loc.url.searchParams.get("s") ?? defaultSilverWeight,
+    loc.url.searchParams.get("silver") ?? defaultSilverWeight,
   );
   const bronzeWeight = useSignal(
-    loc.url.searchParams.get("b") ?? defaultBronzeWeight,
+    loc.url.searchParams.get("bronze") ?? defaultBronzeWeight,
   );
 
-  const divideByPopulation = useSignal(loc.url.searchParams.has("p"));
+  const divideByPopulation = useSignal(loc.url.searchParams.has("population"));
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track }) => {
@@ -120,24 +120,24 @@ export default component$(() => {
 
     const url = new URL(loc.url.href);
     if (goldWeightVal === defaultGoldWeight) {
-      url.searchParams.delete("g");
+      url.searchParams.delete("gold");
     } else {
-      url.searchParams.set("g", goldWeightVal);
+      url.searchParams.set("gold", goldWeightVal);
     }
     if (silverWeightVal === defaultSilverWeight) {
-      url.searchParams.delete("s");
+      url.searchParams.delete("silver");
     } else {
-      url.searchParams.set("s", silverWeightVal);
+      url.searchParams.set("silver", silverWeightVal);
     }
     if (bronzeWeightVal === defaultBronzeWeight) {
-      url.searchParams.delete("b");
+      url.searchParams.delete("bronze");
     } else {
-      url.searchParams.set("b", bronzeWeightVal);
+      url.searchParams.set("bronze", bronzeWeightVal);
     }
     if (divideByPopulationVal) {
-      url.searchParams.set("p", "true");
+      url.searchParams.set("population", "true");
     } else {
-      url.searchParams.delete("p");
+      url.searchParams.delete("population");
     }
     history.replaceState({}, "", url.href);
   });
