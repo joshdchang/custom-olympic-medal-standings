@@ -152,7 +152,7 @@ export default component$(() => {
               Build your own Olympic medal standings
             </h1>
             <div class="flex w-full flex-col items-center gap-4 md:flex-row md:gap-5 lg:gap-6">
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-amber-300 bg-amber-200 px-4 pb-4 pt-3 shadow shadow-amber-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-amber-300 bg-amber-200 px-4 pb-4 pt-3 shadow shadow-amber-700/20">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-amber-600">Gold</span>
                   <span class="font-medium text-black">
@@ -166,7 +166,6 @@ export default component$(() => {
                     w-full
                     appearance-none
                     rounded-lg
-                    lg:w-48
                     [&::-moz-range-thumb]:h-4
                     [&::-moz-range-thumb]:w-4
                     [&::-moz-range-thumb]:cursor-pointer
@@ -188,7 +187,7 @@ export default component$(() => {
                   bind:value={goldWeight}
                 />
               </label>
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 pb-4 pt-3 shadow shadow-slate-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-slate-300 bg-slate-200 px-4 pb-4 pt-3 shadow shadow-slate-700/20">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-slate-500">Silver</span>
                   <span class="font-medium text-black">
@@ -202,7 +201,6 @@ export default component$(() => {
                     w-full
                     appearance-none
                     rounded-lg
-                    lg:w-48
                     [&::-moz-range-thumb]:h-4
                     [&::-moz-range-thumb]:w-4
                     [&::-moz-range-thumb]:cursor-pointer
@@ -224,7 +222,7 @@ export default component$(() => {
                   bind:value={silverWeight}
                 />
               </label>
-              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-red-300 bg-red-200 px-4 pb-4 pt-3 text-red-500 shadow shadow-red-700/20 lg:w-auto">
+              <label class="flex w-full flex-col gap-2 rounded-lg border-2 border-red-300 bg-red-200 px-4 pb-4 pt-3 text-red-500 shadow shadow-red-700/20">
                 <div class="flex items-center justify-between gap-1 text-sm sm:text-base lg:text-lg">
                   <span class="text-red-500">Bronze</span>
                   <span class="font-medium text-black">
@@ -238,7 +236,6 @@ export default component$(() => {
                     w-full
                     appearance-none
                     rounded-lg
-                    lg:w-48
                     [&::-moz-range-thumb]:h-4
                     [&::-moz-range-thumb]:w-4
                     [&::-moz-range-thumb]:cursor-pointer
@@ -261,29 +258,47 @@ export default component$(() => {
                 />
               </label>
             </div>
-            <div class="mb-2 flex w-full items-center justify-center gap-3 lg:justify-start">
-              <label for="toggle" class="flex items-center gap-3">
-                <div class="group relative inline-block h-6 w-12">
-                  <input
-                    type="checkbox"
-                    id="toggle"
-                    class="peer sr-only"
-                    bind:checked={divideByPopulation}
-                  />
-                  <div class="block h-6 w-12 rounded-full bg-slate-400 transition-colors group-hover:bg-slate-500 peer-checked:bg-slate-800 group-hover:peer-checked:bg-slate-900"></div>
-                  <div class="dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow shadow-slate-800/20 transition peer-checked:translate-x-[calc(100%_+_0.5rem)] peer-checked:transform"></div>
-                </div>
-                <span
-                  class={
-                    "text-sm text-slate-500 transition-colors md:text-base lg:text-lg " +
-                    (divideByPopulation.value
-                      ? "text-slate-900"
-                      : "text-slate-500")
-                  }
-                >
-                  Divide by population
-                </span>
-              </label>
+            <div class="mb-2 flex flex-col sm:flex-row gap-5 sm:justify-between">
+              <div class="mb-2 flex items-start justify-center gap-3 lg:justify-start">
+                <label for="toggle" class="flex items-center gap-3">
+                  <div class="group relative inline-block h-6 w-12">
+                    <input
+                      type="checkbox"
+                      id="toggle"
+                      class="peer sr-only"
+                      bind:checked={divideByPopulation}
+                    />
+                    <div class="block h-6 w-12 rounded-full bg-slate-400 transition-colors group-hover:bg-slate-500 peer-checked:bg-slate-800 group-hover:peer-checked:bg-slate-900"></div>
+                    <div class="dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow shadow-slate-800/20 transition peer-checked:translate-x-[calc(100%_+_0.5rem)] peer-checked:transform"></div>
+                  </div>
+                  <span
+                    class={
+                      "text-sm text-slate-500 transition-colors md:text-base lg:text-lg " +
+                      (divideByPopulation.value
+                        ? "text-slate-900"
+                        : "text-slate-500")
+                    }
+                  >
+                    Divide by population
+                  </span>
+                </label>
+              </div>
+              <div class="flex flex-col items-center gap-0.5 lg:items-end lg:gap-1">
+                <p class="text-sm text-slate-800 md:text-base lg:text-lg">
+                  {medals.value.MedalTableInfo.n_EventsFinished} of{" "}
+                  {medals.value.MedalTableInfo.n_EventsTotal} events finished
+                </p>
+                <p class="text-xs text-slate-400 md:text-sm">
+                  as of{" "}
+                  {new Date().toLocaleDateString(undefined, {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    minute: "2-digit",
+                    hour: "2-digit",
+                  })}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -357,7 +372,7 @@ export default component$(() => {
                 {team.n_Total}
               </div>
               {divideByPopulation.value ? (
-                <div class="flex flex-col sm:flex-row items-end sm:items-baseline justify-end gap-0.5 sm:gap-1 text-right text-sm sm:text-base md:text-xl lg:text-2xl">
+                <div class="flex flex-col items-end justify-end gap-0.5 text-right text-sm sm:flex-row sm:items-baseline sm:gap-1 sm:text-base md:text-xl lg:text-2xl">
                   <span class="text-xs text-slate-500 sm:text-sm md:text-base lg:text-lg">
                     1 in
                   </span>
@@ -381,7 +396,7 @@ export default component$(() => {
       </main>
       <footer class="flex justify-center bg-slate-800 p-6 sm:p-7 md:p-8 lg:p-9">
         <div class="flex w-full max-w-5xl flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:max-w-6xl">
-          <div class="flex w-full items-center justify-between gap-2">
+          {/* <div class="flex w-full items-center justify-between gap-2">
             <p class="text-center text-xs text-slate-100 sm:text-sm md:text-base lg:text-lg">
               As of{" "}
               {new Date().toLocaleDateString(undefined, {
@@ -396,7 +411,7 @@ export default component$(() => {
               {medals.value.MedalTableInfo.n_EventsFinished} of{" "}
               {medals.value.MedalTableInfo.n_EventsTotal} events finished
             </p>
-          </div>
+          </div> */}
           <div class="flex w-full items-center justify-between gap-2">
             <p class="text-center text-xs text-slate-400 sm:text-sm">
               Data from{" "}
