@@ -6,6 +6,7 @@ import {
 } from "@builder.io/qwik-city";
 import { z } from "zod";
 import Img2024SummerOlympicsLogo from "~/media/2024_Summer_Olympics_logo.svg?jsx";
+import { population } from "~/data/population";
 
 const medalTableInfoSchema = z.object({
   c_AsOfDate: z.string(),
@@ -65,12 +66,27 @@ function getIndex(
   goldWeight: string,
   silverWeight: string,
   bronzeWeight: string,
+  divideByPopulation: boolean,
 ) {
   return (
-    team.n_Gold * (parseInt(goldWeight) + 10e-6) +
-    team.n_Silver * (parseInt(silverWeight) + 10e-9) +
-    team.n_Bronze * (parseInt(bronzeWeight) + 10e-12)
+    (team.n_Gold * (parseInt(goldWeight) + 10e-6) +
+      team.n_Silver * (parseInt(silverWeight) + 10e-9) +
+      team.n_Bronze * (parseInt(bronzeWeight) + 10e-12)) /
+    (divideByPopulation ? population[team.c_NOCShort] : 1)
   );
+}
+
+function formatBigNumber(num: number) {
+  if (num < 1e3) {
+    return num.toFixed(0);
+  }
+  if (num < 1e6) {
+    return (num / 1e3).toFixed(0) + "K";
+  }
+  if (num < 1e9) {
+    return (num / 1e6).toFixed(0) + "M";
+  }
+  return (num / 1e9).toFixed(0) + "B";
 }
 
 const defaultGoldWeight = "3";
@@ -92,11 +108,15 @@ export default component$(() => {
     loc.url.searchParams.get("b") ?? defaultBronzeWeight,
   );
 
+  const divideByPopulation = useSignal(loc.url.searchParams.has("p"));
+
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ track }) => {
     const goldWeightVal = track(() => goldWeight.value);
     const silverWeightVal = track(() => silverWeight.value);
     const bronzeWeightVal = track(() => bronzeWeight.value);
+
+    const divideByPopulationVal = track(() => divideByPopulation.value);
 
     const url = new URL(loc.url.href);
     if (goldWeightVal === defaultGoldWeight) {
@@ -113,6 +133,11 @@ export default component$(() => {
       url.searchParams.delete("b");
     } else {
       url.searchParams.set("b", bronzeWeightVal);
+    }
+    if (divideByPopulationVal) {
+      url.searchParams.set("p", "true");
+    } else {
+      url.searchParams.delete("p");
     }
     history.replaceState({}, "", url.href);
   });
@@ -236,6 +261,23 @@ export default component$(() => {
                 />
               </label>
             </div>
+            <div class="mb-2 flex w-full items-center justify-center gap-3 lg:justify-start">
+              <label for="toggle" class="flex items-center gap-3">
+                <div class="group relative inline-block h-6 w-12">
+                  <input
+                    type="checkbox"
+                    id="toggle"
+                    class="peer sr-only"
+                    bind:checked={divideByPopulation}
+                  />
+                  <div class="block h-6 w-12 rounded-full bg-slate-400 transition-colors group-hover:bg-slate-500 peer-checked:bg-blue-500 group-hover:peer-checked:bg-blue-600"></div>
+                  <div class="dot absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow shadow-slate-800/20 transition peer-checked:translate-x-[calc(100%_+_0.5rem)] peer-checked:transform"></div>
+                </div>
+                <span class="text-sm text-slate-500 md:text-base lg:text-lg">
+                  Divide by population
+                </span>
+              </label>
+            </div>
           </div>
         </div>
       </header>
@@ -262,17 +304,19 @@ export default component$(() => {
                 goldWeight.value,
                 silverWeight.value,
                 bronzeWeight.value,
+                divideByPopulation.value,
               ) -
               getIndex(
                 a,
                 goldWeight.value,
                 silverWeight.value,
                 bronzeWeight.value,
+                divideByPopulation.value,
               ),
           ).map((team, i) => (
             <div
               key={team.n_NOCID}
-              class="grid grid-cols-[0.8fr_3.5fr_1fr_1fr_1fr_1fr_1fr] items-center gap-2 border-t border-slate-300 px-1 py-4 text-slate-900 sm:px-2 md:px-3 lg:px-4"
+              class="grid grid-cols-[0.8fr_3.5fr_1fr_1fr_1fr_0.8fr_1.2fr] items-center gap-2 border-t border-slate-300 px-1 py-4 text-slate-900 sm:px-2 md:px-3 lg:px-4"
             >
               <div class="text-md sm:text-xl md:text-3xl lg:text-4xl">
                 {i + 1}
@@ -305,11 +349,23 @@ export default component$(() => {
               <div class="md:text-md text-sm sm:text-lg lg:text-2xl">
                 {team.n_Total}
               </div>
-              <div class="text-right text-sm sm:text-lg md:text-2xl lg:text-3xl">
-                {team.n_Gold * parseInt(goldWeight.value) +
-                  team.n_Silver * parseInt(silverWeight.value) +
-                  team.n_Bronze * parseInt(bronzeWeight.value)}
-              </div>
+              {divideByPopulation.value ? (
+                <div class="text-right text-sm sm:text-base md:text-xl lg:text-2xl flex items-baseline justify-end gap-1">
+                  <span class="text-slate-500 text-xs sm:text-sm md:text-base lg:text-lg">1 in</span>
+                  {formatBigNumber(
+                    population[team.c_NOCShort] /
+                      (team.n_Gold * parseInt(goldWeight.value) +
+                        team.n_Silver * parseInt(silverWeight.value) +
+                        team.n_Bronze * parseInt(bronzeWeight.value)),
+                  )}
+                </div>
+              ) : (
+                <div class="text-right text-sm sm:text-lg md:text-2xl lg:text-3xl">
+                  {team.n_Gold * parseInt(goldWeight.value) +
+                    team.n_Silver * parseInt(silverWeight.value) +
+                    team.n_Bronze * parseInt(bronzeWeight.value)}
+                </div>
+              )}
             </div>
           ))}
         </div>
