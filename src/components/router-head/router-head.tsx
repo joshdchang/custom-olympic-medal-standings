@@ -35,12 +35,15 @@ export const RouterHead = component$(() => {
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="msapplication-TileColor" content="#ffc40d" />
       <meta name="theme-color" content="#ffffff" />
-      <meta property="og:title" content="Build your own Paris 2024 medal standings" />
+      <meta
+        property="og:title"
+        content="Build your own Paris 2024 medal standings"
+      />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://olympics.joshchang.co" />
       <meta
         property="og:image"
-        content="https://www.yourwebsite.com/og-image.png"
+        content="https://olympics.joshchang.co/og-image.png"
       />
       <meta
         property="og:description"
